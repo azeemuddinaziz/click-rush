@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  email     String @unique
+  username  String @unique
+  password  String
+  highScore Int    @default(0)
+
+  gameSessions  GameSession[]
+  gameHistories GameHistory[]
+}
+
+model GameSession {
+  id        String    @id @default(uuid())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+  isUsed    Boolean   @default(false)
+}
+
+model GameHistory {
+  id        String   @id @default(uuid())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  score     Int
+  clicks    Int
+  cps       Float
+  isValid   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
