@@ -9,7 +9,7 @@ import healthRoutes from "./routes/health.routes.ts";
 import userRoutes from "./routes/user.routes.ts";
 
 const app: Express = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.use(
   cors({
