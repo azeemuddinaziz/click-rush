@@ -13,7 +13,10 @@ const port = process.env.PORT || 3001;
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://frontend-production-dc431.up.railway.app/",
+    ],
     credentials: true,
   }),
 );
