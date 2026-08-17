@@ -16,6 +16,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://frontend-production-dc431.up.railway.app",
+      "https://click-rush-ts.up.railway.app",
     ],
     credentials: true,
   }),
