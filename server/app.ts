@@ -9,10 +9,11 @@ import healthRoutes from "./routes/health.routes.ts";
 import userRoutes from "./routes/user.routes.ts";
 
 const app: Express = express();
-const port = 3000;
+const port = 3001;
 
 app.use(
   cors({
+    origin: "http://localhost:3000",
     credentials: true,
   }),
 );

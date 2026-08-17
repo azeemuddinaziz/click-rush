@@ -1,4 +1,9 @@
-import { Router } from "express";
+import { Router, type Response } from "express";
+import { prisma } from "../lib/prisma.ts";
+import {
+  requireAuth,
+  type AuthRequest,
+} from "../middlewares/auth.middleware.ts";
 import { authService } from "../services/auth.service.ts";
 
 const router = Router();
@@ -46,6 +51,7 @@ router.route("/login").post(async (req, res) => {
 
     return res.status(200).json({
       message: "Login successful!",
+      token,
       user: publicUser,
     });
   } catch (error: any) {
@@ -57,5 +63,32 @@ router.route("/login").post(async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
+
+router
+  .route("/me")
+  .get(requireAuth, async (req: AuthRequest, res: Response) => {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: req.user?.userId },
+        include: {
+          gameHistories: {
+            orderBy: { createdAt: "desc" },
+            take: 10,
+          },
+        },
+      });
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { password, ...userWithoutPassword } = user;
+
+      res.json({ user: userWithoutPassword });
+    } catch (error) {
+      console.error("Me route error:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
 
 export default router;
