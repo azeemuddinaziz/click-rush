@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://frontend-production-dc431.up.railway.app/",
+      "https://frontend-production-dc431.up.railway.app",
     ],
     credentials: true,
   }),
