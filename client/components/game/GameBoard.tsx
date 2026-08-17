@@ -79,7 +79,7 @@ export function GameBoard() {
             onMouseDown={preventSelection}
             onClick={registerClick}
             disabled={gameState === "submitting"}
-            className="w-full aspect-square sm:aspect-video bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-indigo-500 rounded-2xl flex items-center justify-center transition-all active:scale-[0.98] active:bg-slate-800 disabled:opacity-50 disabled:active:scale-100 group shadow-2xl cursor-pointer"
+            className="w-full aspect-square sm:aspect-video bg-linear-to-br from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-indigo-500 rounded-2xl flex items-center justify-center transition-all active:scale-[0.98] active:bg-slate-800 disabled:opacity-50 disabled:active:scale-100 group shadow-2xl cursor-pointer"
           >
             <div className="text-center pointer-events-none">
               <MousePointerClick className="w-20 h-20 mx-auto text-slate-600 group-active:text-indigo-400 group-hover:scale-110 transition-transform mb-4" />
